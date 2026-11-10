@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#080807" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Brand Geniuz | Website in progress</title>
+    <meta
+      name="description"
+      content="Brand Geniuz is improving this experience. Website in progress."
+    />
+    <link rel="icon" href="assets/brand-geniuz-logo.png" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --black: #080807;
+        --white: #f7f4ec;
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+        background: var(--black);
+      }
+
+      html {
+        scroll-behavior: auto;
+      }
+
+      body {
+        color: var(--white);
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .journey {
+        position: relative;
+        height: 360vh;
+        height: 360svh;
+      }
+
+      .stage {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        height: 100svh;
+        min-height: 560px;
+        overflow: hidden;
+        isolation: isolate;
+        background: var(--black);
+      }
+
+      .film,
+      .shade,
+      .grain,
+      .intro,
+      .arrival {
+        position: absolute;
+        inset: 0;
+      }
+
+      .film {
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+        user-select: none;
+        pointer-events: none;
+      }
+
+      .shade {
+        z-index: 1;
+        pointer-events: none;
+        background:
+          linear-gradient(180deg, rgba(0, 0, 0, 0.54), transparent 27%),
+          radial-gradient(circle at 50% 52%, transparent 28%, rgba(0, 0, 0, 0.22) 100%);
+        opacity: 1;
+        transition: opacity 400ms linear;
+      }
+
+      .grain {
+        z-index: 2;
+        pointer-events: none;
+        opacity: 0.035;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E");
+        mix-blend-mode: soft-light;
+      }
+
+      .intro,
+      .arrival {
+        z-index: 4;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        pointer-events: none;
+        will-change: opacity, transform;
+      }
+
+      .intro {
+        justify-content: space-between;
+        padding: clamp(28px, 5.5vh, 62px) 24px clamp(30px, 5vh, 58px);
+      }
+
+      .intro-logo {
+        width: clamp(188px, 15vw, 280px);
+        height: auto;
+        filter: drop-shadow(0 5px 22px rgba(0, 0, 0, 0.45));
+      }
+
+      .intro-copy {
+        width: min(90vw, 640px);
+        text-shadow: 0 3px 28px rgba(0, 0, 0, 0.85);
+      }
+
+      .eyebrow {
+        margin: 0 0 13px;
+        color: rgba(247, 244, 236, 0.65);
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.28em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      h1,
+      .arrival-line {
+        margin: 0;
+        font-size: clamp(23px, 2.35vw, 40px);
+        font-weight: 400;
+        letter-spacing: -0.04em;
+        line-height: 1.08;
+      }
+
+      .scroll-cue {
+        display: inline-flex;
+        align-items: center;
+        gap: 11px;
+        margin-top: 25px;
+        color: rgba(247, 244, 236, 0.72);
+        font-size: 9px;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      .scroll-cue::before {
+        content: "";
+        width: 1px;
+        height: 34px;
+        background: linear-gradient(180deg, rgba(247, 244, 236, 0.2), rgba(247, 244, 236, 0.9));
+        animation: cue 1.8s var(--ease) infinite;
+        transform-origin: top;
+      }
+
+      .arrival {
+        justify-content: center;
+        padding: 24px;
+        color: #171715;
+        opacity: 0;
+        transform: translateY(18px) scale(0.985);
+      }
+
+      .arrival-logo {
+        width: clamp(210px, 18vw, 330px);
+        height: auto;
+      }
+
+      .arrival-line {
+        margin-top: clamp(24px, 4vh, 42px);
+        font-size: clamp(19px, 1.75vw, 29px);
+      }
+
+      .arrival-subline {
+        margin: 10px 0 0;
+        color: rgba(23, 23, 21, 0.72);
+        font-size: clamp(14px, 1.1vw, 18px);
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        line-height: 1.25;
+      }
+
+      .arrival-note {
+        margin: 17px 0 0;
+        color: rgba(23, 23, 21, 0.58);
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+      }
+
+      .loader {
+        position: fixed;
+        z-index: 20;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background: var(--black);
+        transition: opacity 650ms var(--ease), visibility 650ms;
+      }
+
+      .loader::after {
+        content: "";
+        width: 28px;
+        height: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-top-color: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        animation: spin 850ms linear infinite;
+      }
+
+      body.is-ready .loader {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      @keyframes cue {
+        0%,
+        100% {
+          opacity: 0.35;
+          transform: scaleY(0.45);
+        }
+        50% {
+          opacity: 1;
+          transform: scaleY(1);
+        }
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (max-width: 640px) {
+        .journey {
+          height: 320svh;
+        }
+
+        .stage {
+          min-height: 0;
+        }
+
+        .film {
+          object-position: 50% center;
+        }
+
+        .intro {
+          padding: 28px 18px max(26px, env(safe-area-inset-bottom));
+        }
+
+        .intro-logo {
+          width: 190px;
+        }
+
+        .arrival-logo {
+          width: min(68vw, 260px);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .journey {
+          height: 100svh;
+        }
+
+        .intro,
+        .shade,
+        .grain {
+          display: none;
+        }
+
+        .arrival {
+          opacity: 1;
+          transform: none;
+        }
+
+        .loader,
+        .scroll-cue::before {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loader" aria-hidden="true"></div>
+    <main class="journey" aria-label="Brand Geniuz website in progress">
+      <section class="stage">
+        <canvas
+          class="film"
+          width="1280"
+          height="720"
+          aria-hidden="true"
+        ></canvas>
+        <div class="shade"></div>
+        <div class="grain"></div>
+
+        <div class="intro">
+          <img
+            class="intro-logo"
+            src="assets/brand-geniuz-logo.png"
+            alt="Brand Geniuz"
+          />
+          <div class="intro-copy">
+            <p class="eyebrow">Website in progress</p>
+            <h1>We’re improving this experience for you.</h1>
+            <span class="scroll-cue">Scroll to enter</span>
+          </div>
+        </div>
+
+        <div class="arrival" aria-hidden="true">
+          <img
+            class="arrival-logo"
+            src="assets/brand-geniuz-logo-dark.png"
+            alt=""
+          />
+          <p class="arrival-line">Something new is taking shape.</p>
+          <p class="arrival-subline">We’re improving this experience for you.</p>
+          <p class="arrival-note">Website in progress</p>
+        </div>
+      </section>
+    </main>
+
+    <script src="assets/gsap.min.js"></script>
+    <script src="assets/ScrollTrigger.min.js"></script>
+    <script>
+      const film = document.querySelector(".film");
+      const intro = document.querySelector(".intro");
+      const arrival = document.querySelector(".arrival");
+      const shade = document.querySelector(".shade");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const frameCount = 61;
+      const frameDirectory = window.innerWidth >= 900 ? "frames-v4-hd" : "frames-v4";
+      const framePaths = Array.from(
+        { length: frameCount },
+        (_, index) => `assets/${frameDirectory}/frame-${String(index + 1).padStart(3, "0")}.jpg`,
+      );
+      const frames = new Array(frameCount);
+      const context = film.getContext("2d", { alpha: false });
+      let currentFrame = -1;
+      let teaserTween;
+      let resizeFrame;
+
+      function drawFrame(index, force = false) {
+        const nextFrame = Math.max(0, Math.min(frameCount - 1, index));
+        if (!force && nextFrame === currentFrame) return;
+        const image = frames[nextFrame] ?? frames[currentFrame] ?? frames[0];
+        if (!image) return;
+
+        const bounds = film.getBoundingClientRect();
+        const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        const width = Math.max(1, Math.round(bounds.width * pixelRatio));
+        const height = Math.max(1, Math.round(bounds.height * pixelRatio));
+        if (film.width !== width || film.height !== height) {
+          film.width = width;
+          film.height = height;
+        }
+
+        const scale = Math.max(width / image.naturalWidth, height / image.naturalHeight);
+        const drawnWidth = image.naturalWidth * scale;
+        const drawnHeight = image.naturalHeight * scale;
+        context.fillStyle = "#080807";
+        context.fillRect(0, 0, width, height);
+        context.drawImage(
+          image,
+          (width - drawnWidth) / 2,
+          (height - drawnHeight) / 2,
+          drawnWidth,
+          drawnHeight,
+        );
+        currentFrame = nextFrame;
+        film.dataset.currentFrame = String(nextFrame);
+        film.dataset.frameDirectory = frameDirectory;
+        film.dataset.sourceWidth = String(image.naturalWidth);
+        film.dataset.sourceHeight = String(image.naturalHeight);
+      }
+
+      function loadFrames() {
+        return Promise.allSettled(
+          framePaths.map((src, index) => new Promise((resolve) => {
+            const image = new Image();
+            image.decoding = "async";
+            image.onload = async () => {
+              try {
+                await image.decode();
+              } catch {}
+              frames[index] = image;
+              resolve();
+            };
+            image.onerror = resolve;
+            image.src = src;
+          })),
+        );
+      }
+
+      function stopTeaser() {
+        if (!teaserTween) return;
+        teaserTween.kill();
+        teaserTween = null;
+      }
+
+      function startTeaser() {
+        const teaser = { frame: 0 };
+        teaserTween = gsap.timeline({
+          delay: 0.8,
+          repeat: -1,
+          repeatDelay: 1.1,
+          onUpdate() {
+            if (teaserTween) drawFrame(Math.round(teaser.frame));
+          },
+        })
+          .to(teaser, { frame: 8, duration: 0.52, ease: "power2.inOut" })
+          .to(teaser, { frame: 0, duration: 0.68, ease: "sine.inOut" })
+          .to(teaser, { frame: 1.5, duration: 0.11, ease: "power1.out" })
+          .to(teaser, { frame: 0, duration: 0.17, ease: "power1.inOut" });
+
+        ["wheel", "touchstart", "pointerdown", "keydown"].forEach((eventName) => {
+          window.addEventListener(eventName, stopTeaser, { once: true, passive: true });
+        });
+      }
+
+      function reveal() {
+        document.body.classList.add("is-ready");
+      }
+
+      function setupExperience() {
+        if (reducedMotion.matches) {
+          drawFrame(frameCount - 1);
+          reveal();
+          return;
+        }
+
+        gsap.registerPlugin(ScrollTrigger);
+        drawFrame(0);
+
+        ScrollTrigger.create({
+          trigger: ".journey",
+          start: "top top",
+          end: "bottom bottom",
+          invalidateOnRefresh: true,
+          onUpdate(self) {
+            if (self.progress > 0.001) stopTeaser();
+            drawFrame(Math.round(self.progress * (frameCount - 1)));
+
+            const introProgress = gsap.utils.clamp(0, 1, self.progress / 0.16);
+            gsap.set(intro, {
+              opacity: 1 - introProgress,
+              y: -18 * introProgress,
+            });
+
+            const arrivalProgress = gsap.utils.clamp(
+              0,
+              1,
+              (self.progress - 0.78) / 0.18,
+            );
+            gsap.set(arrival, {
+              opacity: arrivalProgress,
+              y: 18 * (1 - arrivalProgress),
+              scale: 0.985 + arrivalProgress * 0.015,
+            });
+            arrival.setAttribute("aria-hidden", arrivalProgress < 0.9);
+            shade.style.opacity = String(1 - self.progress * 0.86);
+          },
+        });
+
+        reveal();
+        ScrollTrigger.refresh();
+        startTeaser();
+      }
+
+      loadFrames().then(setupExperience);
+
+      window.addEventListener("resize", () => {
+        window.cancelAnimationFrame(resizeFrame);
+        resizeFrame = window.requestAnimationFrame(() => drawFrame(currentFrame, true));
+      });
+
+      window.setTimeout(reveal, 4500);
+    </script>
+  </body>
+</html>
